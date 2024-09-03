@@ -20,4 +20,4 @@ This is a repository for implementing optimizers from scratch.
 | Adam | 830 | 0.02 |
 
 ### learning curve of each optimizer
-![learning curve](https://github.com/TakumaIkeda/adam_fullscratch/results/loss_curve.png)
+![learning curve](/results/loss_curve.png)
