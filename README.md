@@ -20,4 +20,4 @@ This is a repository for implementing optimizers from scratch.
 | Adam | 830 | 0.02 |
 
 ### learning curve of each optimizer
-![learning curve]("./results/learning_curve.png")
+![learning curve](./results/learning_curve.png)
