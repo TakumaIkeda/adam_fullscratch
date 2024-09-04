@@ -36,4 +36,4 @@ def adam(lr=0.01, beta1=0.9, beta2=0.999, epsilon=1e-12, x=0, y=0):
       break
     i += 1
 
-adam(lr=0.01, beta1=0.9, beta2=0.999, epsilon=1e-12, x=0, y=0)
+adam(lr=0.01, beta1=0.9, beta2=0.999, epsilon=1e-8, x=0, y=0)
