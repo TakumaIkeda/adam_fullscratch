@@ -26,4 +26,4 @@ def rmsprop(lr=0.01, beta2=0.999, epsilon=1e-12, x=0, y=0):
       break
     i += 1
 
-rmsprop(lr=1e-5, beta2=0.999, epsilon=1e-12, x=0, y=0)
+rmsprop(lr=0.0001, beta2=0.99999, epsilon=1e-8, x=0, y=0)

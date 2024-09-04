@@ -16,7 +16,7 @@ This is a repository for implementing optimizers from scratch.
 |:---------:|:---------------:|:------------:|
 | Gradient Descent | 12768 | 0.002 |
 | Momentum | 722 | 0.03 |
-| RMSprop | - | < 1e-5 |
+| RMSprop | 9842 | 0.0001 |
 | Adam | 830 | 0.02 |
 
 ### learning curve of each optimizer
