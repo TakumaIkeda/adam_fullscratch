@@ -9,8 +9,8 @@ def rosenbrock_grad(x, y):
   return dldx, dldy
 
 def momentum(lr=0.01, beta=0.9, x=0, y=0):
-
   i = 0
+  nu_x, nu_y = 0, 0
   while True:
     dldx, dldy = rosenbrock_grad(x, y)
     nu_x = beta * nu_x + (1 - beta) * dldx
