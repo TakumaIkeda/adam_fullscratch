@@ -9,18 +9,14 @@ def rosenbrock_grad(x, y):
   return dldx, dldy
 
 def rmsprop(lr=0.01, beta2=0.999, epsilon=1e-12, x=0, y=0):
-  s_x_prev = 0
-  s_y_prev = 0
-
   i = 0
+  s_x, s_y = 0, 0
   while True:
     dldx, dldy = rosenbrock_grad(x, y)
-    s_x = beta2 * s_x_prev + (1 - beta2) * dldx ** 2
-    s_y = beta2 * s_y_prev + (1 - beta2) * dldy ** 2
+    s_x = beta2 * s_x + (1 - beta2) * dldx ** 2
+    s_y = beta2 * s_y + (1 - beta2) * dldy ** 2
     x -= lr * dldx / (s_x + epsilon) ** 0.5
     y -= lr * dldy / (s_y + epsilon) ** 0.5
-    s_x_prev = s_x
-    s_y_prev = s_y
     print(f'iter: {i}, x: {x}, y: {y}, dldx: {dldx}, dldy: {dldy}, loss: {rosenbrock(x, y)}')
     if math.sqrt(dldx ** 2 + dldy ** 2) < 1e-5:
       break
