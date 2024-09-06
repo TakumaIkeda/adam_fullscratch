@@ -20,7 +20,8 @@ def grad_descent(lr=0.01, x=0, y=0):
 
     history.append((x, y))
 
-    print(f'iter: {i}, x: {x}, y: {y}, dldx: {dldx}, dldy: {dldy}, loss: {rosenbrock(x, y)}')
+    if i % 1000 == 0:
+      print(f'iter: {i}, x: {x}, y: {y}, dldx: {dldx}, dldy: {dldy}, loss: {rosenbrock(x, y)}')
 
     i += 1
 
