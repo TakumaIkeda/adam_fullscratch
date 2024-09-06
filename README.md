@@ -18,6 +18,3 @@ This is a repository for implementing optimizers from scratch.
 | Momentum | 722 | 0.03 |
 | RMSprop | 9842 | 0.0001 |
 | Adam | 830 | 0.02 |
-
-### learning curve of each optimizer
-![learning curve](/results/loss_curve.png)
