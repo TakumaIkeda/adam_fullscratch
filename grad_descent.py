@@ -38,7 +38,6 @@ y_init = random.uniform(-2, 2)
 
 result = grad_descent(lr=0.001, x=x_init, y=y_init)
 
-# 対数グラフにプロット
 plt.figure()
 plt.plot([math.log(rosenbrock(x, y)) for x, y in result])
 plt.xlabel('iteration')
