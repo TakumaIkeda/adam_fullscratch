@@ -35,8 +35,8 @@ def adam(lr=0.01, beta1=0.9, beta2=0.999, epsilon=1e-12, x=0, y=0):
   s_x = 0
   s_y = 0
   while True:
-    dldx, dldy = rosenbrock_grad(x, y)
-    # dldx, dldy = himmelblau_grad(x, y)
+    # dldx, dldy = rosenbrock_grad(x, y)
+    dldx, dldy = himmelblau_grad(x, y)
     # dldx, dldy = ackley_grad(x, y)
     nu_x = beta1 * nu_x + (1 - beta1) * dldx
     nu_y = beta1 * nu_y + (1 - beta1) * dldy
@@ -48,8 +48,8 @@ def adam(lr=0.01, beta1=0.9, beta2=0.999, epsilon=1e-12, x=0, y=0):
     history.append((x, y))
 
     if i % 1000 == 0:
-      print(f'iter: {i}, x: {x}, y: {y}, dldx: {dldx}, dldy: {dldy}, loss: {rosenbrock(x, y)}')
-      # print(f'iter: {i}, x: {x}, y: {y}, dldx: {dldx}, dldy: {dldy}, loss: {himmelblau(x, y)}')
+      # print(f'iter: {i}, x: {x}, y: {y}, dldx: {dldx}, dldy: {dldy}, loss: {rosenbrock(x, y)}')
+      print(f'iter: {i}, x: {x}, y: {y}, dldx: {dldx}, dldy: {dldy}, loss: {himmelblau(x, y)}')
       # print(f'iter: {i}, x: {x}, y: {y}, dldx: {dldx}, dldy: {dldy}, loss: {ackley(x, y)}')
     i += 1
 
@@ -61,36 +61,58 @@ def adam(lr=0.01, beta1=0.9, beta2=0.999, epsilon=1e-12, x=0, y=0):
 
   return history
 
+results = []
 random.seed(42)
-x_init = random.uniform(-2, 2)
-y_init = random.uniform(-2, 2)
-
-result = adam(lr=0.01, beta1=0.9, beta2=0.999, epsilon=1e-8, x=x_init, y=y_init)
-print(f"iter: {len(result)}, x: {result[-1][0]}, y: {result[-1][1]}, loss: {rosenbrock(result[-1][0], result[-1][1])}")
-# print(f"iter: {len(result)}, x: {result[-1][0]}, y: {result[-1][1]}, loss: {himmelblau(result[-1][0], result[-1][1])}")
+for _ in range(10):
+  x_init = random.uniform(-6, 6)
+  y_init = random.uniform(-6, 6)
+  results.append(adam(lr=0.01, x=x_init, y=y_init))
+  print(f"iter: {len(results[-1])}, x: {results[-1][-1][0]}, y: {results[-1][-1][1]}, loss: {himmelblau(results[-1][-1][0], results[-1][-1][1])}")
+# print(f"iter: {len(result)}, x: {result[-1][0]}, y: {result[-1][1]}, loss: {rosenbrock(result[-1][0], result[-1][1])}")
 # print(f"iter: {len(result)}, x: {result[-1][0]}, y: {result[-1][1]}, loss: {ackley(result[-1][0], result[-1][1])}")
 
-plt.figure()
-plt.plot([math.log(rosenbrock(x, y)) for x, y in result])
-plt.xlabel('iteration')
-plt.ylabel('log(loss)')
-plt.savefig('results/adam.png')
+# plt.figure()
+# plt.plot([math.log(rosenbrock(x, y)) for x, y in result])
+# plt.xlabel('iteration')
+# plt.ylabel('log(loss)')
+# plt.savefig('results/adam.png')
 
-# ヒートマップ上に最適解の移動を描画
+# for rosenbrock
 # Define grid
-x1 = np.linspace(-2, 2, 400)
-x2 = np.linspace(-2, 2, 400)
+# x1 = np.linspace(-2, 2, 400)
+# x2 = np.linspace(-2, 2, 400)
+# X1, X2 = np.meshgrid(x1, x2)
+# Z = rosenbrock(X1, X2)
+
+# Plot
+# plt.figure(figsize=(8, 6))
+# contour = plt.contourf(X1, X2, Z, levels=50, cmap='viridis')
+# plt.colorbar(contour)
+# plt.title('2D Rosenbrock Function')
+# plt.title('2D Himmelblau Function')
+# plt.xlabel('$x_1$')
+# plt.ylabel('$x_2$')
+# x = [x for x, y in result]
+# y = [y for x, y in result]
+# plt.plot(x, y, color='red')
+# plt.savefig('results/adam_path.png')
+
+# for himmelblau
+# Define grid
+x1 = np.linspace(-6, 6, 400)
+x2 = np.linspace(-6, 6, 400)
 X1, X2 = np.meshgrid(x1, x2)
-Z = rosenbrock(X1, X2)
+Z = himmelblau(X1, X2)
 
 # Plot
 plt.figure(figsize=(8, 6))
 contour = plt.contourf(X1, X2, Z, levels=50, cmap='viridis')
 plt.colorbar(contour)
-plt.title('2D Rosenbrock Function')
+plt.title('2D Himmelblau Function')
 plt.xlabel('$x_1$')
 plt.ylabel('$x_2$')
-x = [x for x, y in result]
-y = [y for x, y in result]
-plt.plot(x, y, color='red')
+for result in results:
+  x = [x for x, y in result]
+  y = [y for x, y in result]
+  plt.plot(x, y, color='red')
 plt.savefig('results/adam_path.png')
